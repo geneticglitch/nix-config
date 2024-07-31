@@ -55,7 +55,7 @@
     enable = true;
     xwayland.enable = true;
   };
-
+  programs.thunar.enable = true;
   # Enable dconf
   programs.dconf.enable = true;
 
@@ -79,7 +79,6 @@
     wofi
     wlogout
     mako
-    thunar
     polkit_gnome
     python3
     starship
@@ -140,9 +139,15 @@
   };
 
   # Home Manager
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.users.aryan = import ./home.nix;
+  home-manager = {
+  useGlobalPkgs = true;
+  useUserPackages = true;
+  backupFileExtension = "backup";  # Add this line
+  users.aryan = { pkgs, ... }: {
+    home.stateVersion = "24.05";
+    imports = [ ./home.nix ];
+  };
+};
 
   # State version
   system.stateVersion = "24.05";
