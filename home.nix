@@ -9,7 +9,6 @@
     ripgrep
     fzf
     bat
-    exa
     delta
   ];
 
@@ -45,23 +44,23 @@
   };
 
   xdg.configFile = {
-    "hypr/hyprland.conf".source = ./dotfiles/hyprland.conf;
-    "hypr/xdg-portal-hyprland".source = ./dotfiles/xdg-portal-hyprland;
-    "kitty/kitty.conf".source = ./dotfiles/kitty.conf;
-    "kitty/mocha.conf".source = ./dotfiles/mocha.conf;
-    "mako/config".source = ./dotfiles/mako-config;
-    "swaylock/config".source = ./dotfiles/swaylock-config;
-    "waybar/config".source = ./dotfiles/waybar-config;
-    "waybar/style.css".source = ./dotfiles/waybar-style.css;
-    "wofi/config".source = ./dotfiles/wofi-config;
-    "wofi/style.css".source = ./dotfiles/wofi-style.css;
+    "hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
+    "hypr/xdg-portal-hyprland".source = ./dotfiles/hypr/xdg-portal-hyprland;
+    "kitty/kitty.conf".source = ./dotfiles/kitty/kitty.conf;
+    "kitty/mocha.conf".source = ./dotfiles/kitty/mocha.conf;
+    "mako/config".source = ./dotfiles/mako/config;
+    "swaylock/config".source = ./dotfiles/swaylock/config;
+    "waybar/config".source = ./dotfiles/waybar/config.jsonc;
+    "waybar/style.css".source = ./dotfiles/waybar/style.css;
+    "wofi/config".source = ./dotfiles/wofi/config;
+    "wofi/style.css".source = ./dotfiles/wofi/style.css;
   };
 
   services.mako.enable = true;
 
   programs.kitty = {
     enable = true;
-    extraConfig = builtins.readFile ./dotfiles/kitty.conf;
+    extraConfig = builtins.readFile ./dotfiles/kitty/kitty.conf;
   };
 
   programs.waybar.enable = true;
