@@ -43,7 +43,7 @@
   users.users.aryan = {
     isNormalUser = true;
     description = "Aryan Singh";
-    extraGroups = [ "networkmanager" "wheel" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "libvirtd" "kvm" ];
     packages = with pkgs; [];
   };
 
@@ -109,7 +109,24 @@
     obs-studio
     alsa-utils
     pavucontrol
+    virt-manager
+    qemu_full
+    libvirt
+    spice-vdagent
   ];
+
+  #qemu
+    virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+      };
+    };
+    spiceUSBRedirection.enable = true;
+  };
+  security.polkit.enable = true;
 
   # Fonts
   fonts.packages = with pkgs; [
@@ -178,7 +195,6 @@
 
   # Enable ALSA
   hardware.enableAllFirmware = true;
-  nixpkgs.config.pulseaudio = true;
 
   # Enable realtime capabilities for audio users
   security.rtkit.enable = true;
