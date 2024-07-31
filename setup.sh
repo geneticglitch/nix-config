@@ -14,6 +14,7 @@ echo "Copying configuration files..."
 cp ./configuration.nix /etc/nixos/configuration.nix
 cp ./home.nix /etc/nixos/home.nix
 cp ./starship.toml /etc/nixos/starship.toml
+cp ./scripts /home/aryan/scripts
 
 # Copy dotfiles
 echo "Copying dotfiles..."
