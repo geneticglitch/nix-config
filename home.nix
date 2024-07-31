@@ -55,6 +55,7 @@
     "waybar/style.css".source = ./dotfiles/waybar/style.css;
     "wofi/config".source = ./dotfiles/wofi/config;
     "wofi/style.css".source = ./dotfiles/wofi/style.css;
+    "starship.toml".source = ./starship.toml;
   };
 
   services.mako.enable = true;
