@@ -51,6 +51,7 @@
     "kitty/mocha.conf".source = ./dotfiles/kitty/mocha.conf;
     "mako/config".source = ./dotfiles/mako/config;
     "swaylock/config".source = ./dotfiles/swaylock/config;
+    "waybar/scripts/waybar-wttr.py" = ./dotfiles/waybar/scripts/waybar-wttr.py;
     "waybar/config".source = ./dotfiles/waybar/config.jsonc;
     "waybar/style.css".source = ./dotfiles/waybar/style.css;
     "wofi/config".source = ./dotfiles/wofi/config;
