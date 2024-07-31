@@ -34,16 +34,16 @@
   };
 
   # X11 keymap
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "";
+    variant = "";
   };
 
   # User account
   users.users.aryan = {
     isNormalUser = true;
     description = "Aryan Singh";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" ];
     packages = with pkgs; [];
   };
 
@@ -55,16 +55,22 @@
     enable = true;
     xwayland.enable = true;
   };
+
+  # Enable Thunar
   programs.thunar.enable = true;
+
   # Enable dconf
   programs.dconf.enable = true;
 
   # Sound
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+  };
 
   # Touchpad support
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Bluetooth
   hardware.bluetooth.enable = true;
@@ -100,13 +106,40 @@
     firefox
     vscode
     github-desktop
+    obs-studio
+    alsa-utils
+    pavucontrol
   ];
 
   # Fonts
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = ["JetBrainsMono"]; })
+    (nerdfonts.override { fonts = ["VictorMono"]; })
+    victor-mono
     noto-fonts-emoji
   ];
+
+  fonts.fontconfig = {
+    defaultFonts = {
+      monospace = [ "Victor Mono" ];
+      sansSerif = [ "Victor Mono" ];
+      serif = [ "Victor Mono" ];
+    };
+    
+    localConf = ''
+      <?xml version="1.0"?>
+      <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+      <fontconfig>
+        <match target="font">
+          <test name="family" compare="contains">
+            <string>Victor Mono</string>
+          </test>
+          <edit name="weight" mode="assign">
+            <const>semibold</const>
+          </edit>
+        </match>
+      </fontconfig>
+    '';
+  };
 
   # GTK Theme
   environment.etc."gtk-3.0/settings.ini".text = ''
@@ -117,12 +150,6 @@
 
   # OpenSSH
   services.openssh.enable = true;
-
-  # Printing
-  services.printing.enable = true;
-
-  # Flatpak
-  services.flatpak.enable = true;
 
   # Power profiles daemon
   services.power-profiles-daemon.enable = true;
@@ -140,14 +167,21 @@
 
   # Home Manager
   home-manager = {
-  useGlobalPkgs = true;
-  useUserPackages = true;
-  backupFileExtension = "backup";  # Add this line
-  users.aryan = { pkgs, ... }: {
-    home.stateVersion = "24.05";
-    imports = [ ./home.nix ];
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "backup";
+    users.aryan = { pkgs, ... }: {
+      home.stateVersion = "24.05";
+      imports = [ ./home.nix ];
+    };
   };
-};
+
+  # Enable ALSA
+  hardware.enableAllFirmware = true;
+  nixpkgs.config.pulseaudio = true;
+
+  # Enable realtime capabilities for audio users
+  security.rtkit.enable = true;
 
   # State version
   system.stateVersion = "24.05";
