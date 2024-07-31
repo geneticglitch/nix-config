@@ -46,6 +46,7 @@
   xdg.configFile = {
     "hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
     "hypr/xdg-portal-hyprland".source = ./dotfiles/hypr/xdg-portal-hyprland;
+    "hypr/hong-kong-night.jpg".source = ./dotfiles/hypr/hong-kong-night.jpg;
     "kitty/kitty.conf".source = ./dotfiles/kitty/kitty.conf;
     "kitty/mocha.conf".source = ./dotfiles/kitty/mocha.conf;
     "mako/config".source = ./dotfiles/mako/config;
